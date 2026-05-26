@@ -1,9 +1,14 @@
-FROM java:8-jdk-alpine
+FROM openjdk:11-jre
 
-COPY ./target/TipoDeCambio-0.0.1-SNAPSHOT.jar /usr/app/
+# Establecemos el directorio de trabajo
+WORKDIR /app
 
-WORKDIR /usr/app
+# Copiamos el archivo JAR
+COPY ./target/TipoDeCambio-0.0.1-SNAPSHOT.jar app.jar
 
-RUN sh -c 'touch TipoDeCambio-0.0.1-SNAPSHOT.jar'
+# Exponemos el puerto
+EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","TipoDeCambio-0.0.1-SNAPSHOT.jar"] 
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
