@@ -1,19 +1,13 @@
 package com.jcallo.reto.servicedto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Builder
 public class TipoCambioResponse {
-	private double montoOrigen;
-    private String monedaOrigen;
-    private String monedaDestino;
-    private double montoTipoCambio;
-    private double factorTipoCambio;
+    private Double montoOrigen;
+    private Double montoDestino;
+    private Double factor;
 }
 

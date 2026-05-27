@@ -1,34 +1,29 @@
 package com.jcallo.reto.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import jakarta.persistence.*;
 @Entity
-@Table(name="TIPOCAMBIO")
-@Getter
-@Setter
+@Table(name = "tipo_cambio")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TipoCambio {
-    @Id
-    @Column(name = "ID")
-    private int id;
 
-    @Column(name = "MONEDA_ORIGENN")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "moneda_origen")
     private String monedaOrigen;
     
-    @Column(name = "MONEDA_DESTINO")
+    @Column(name = "moneda_destino")
     private String monedaDestino;
     
-    @Column(name = "FACTOR_TIPO_CAMBIO")
-    private Double factorTipoCambio;
+    @Column(name = "factor")
+    private Double factor;
 }

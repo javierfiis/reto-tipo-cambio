@@ -2,12 +2,14 @@ package com.jcallo.reto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.jcallo.reto.security.JWTAuthorizationFilter;
 
@@ -18,17 +20,16 @@ public class JwtTipoDeCambioApplication {
 		SpringApplication.run(JwtTipoDeCambioApplication.class, args);
 	}
 	
-	@EnableWebSecurity
-
-	@Configuration
-	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable()
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+		http.csrf(AbstractHttpConfigurer::disable)
 					.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-					.authorizeRequests().antMatchers(HttpMethod.POST, "/user").permitAll().anyRequest().authenticated();
+				.authorizeHttpRequests(authz -> authz
+					.requestMatchers(new MvcRequestMatcher(introspector, "/user")).permitAll()
+					.requestMatchers(new MvcRequestMatcher(introspector, "/api/**")).authenticated()
+					.anyRequest().authenticated()
+				);
+		return http.build();
 		}
 	}
 
-}

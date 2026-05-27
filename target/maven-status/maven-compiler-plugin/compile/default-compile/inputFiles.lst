@@ -2,7 +2,6 @@
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/exception/ErrorCode.java
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/controller/TipoCambioDosController.java
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/JwtTipoDeCambioApplication.java
-/home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/controller/ExceptionRestController.java
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/webdto/request/TipoCambioWebRequest.java
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/service/TipoCambioServiceImpl.java
 /home/javier/Documentos/repo/reto-tipo-cambio/src/main/java/com/jcallo/reto/repository/TipoCambioRepository.java

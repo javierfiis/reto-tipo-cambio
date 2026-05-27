@@ -1,29 +1,24 @@
 package com.jcallo.reto.webdto.response;
 
-import com.jcallo.reto.exception.ErrorCode;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@Builder
+@Data
 public class BaseWebResponse<T> {
-	private ErrorCode errorCode;
+    private boolean success;
+    private String message;
     private T data;
 
-    public static BaseWebResponse successNoData() {
-        return BaseWebResponse.builder()
-                .build();
-    }
-
     public static <T> BaseWebResponse<T> successWithData(T data) {
-        return BaseWebResponse.<T>builder()
-                .data(data)
-                .build();
+        BaseWebResponse<T> response = new BaseWebResponse<>();
+        response.success = true;
+        response.data = data;
+        return response;
     }
 
-    public static BaseWebResponse error(ErrorCode errorCode) {
-        return BaseWebResponse.builder()
-                .errorCode(errorCode)
-                .build();
+    public static <T> BaseWebResponse<T> successNoData() {
+        BaseWebResponse<T> response = new BaseWebResponse<>();
+        response.success = true;
+        response.message = "Operación exitosa";
+        return response;
     }
 }
